@@ -32,7 +32,7 @@ class PMWidgetFactory(WidgetFactory):
         return PMWindow()
 
 
-class WindowFactory(object):
+class Window(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
@@ -44,7 +44,7 @@ class WindowFactory(object):
         pass
 
 
-class MotifWindow(WindowFactory):
+class MotifWindow(Window):
 
     def open(self):
         print "Opens Motif Window"
@@ -52,7 +52,7 @@ class MotifWindow(WindowFactory):
     def close(self):
         print "Closes Motif Window"
 
-class PMWindow(WindowFactory):
+class PMWindow(Window):
 
     def open(self):
         print "Opens PM Window"
@@ -60,7 +60,7 @@ class PMWindow(WindowFactory):
     def close(self):
         print "Closes PM Window"
 
-class ScrollFactory(object):
+class Scroll(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
@@ -72,7 +72,7 @@ class ScrollFactory(object):
         pass
 
 
-class MotifScroll(ScrollFactory):
+class MotifScroll(Scroll):
 
     def show(self):
         print "Shows Motif Scroll"
@@ -80,7 +80,7 @@ class MotifScroll(ScrollFactory):
     def hide(self):
         print "Hides Motif Scroll"
 
-class PMScroll(ScrollFactory):
+class PMScroll(Scroll):
 
     def show(self):
         print "Shows PM Scroll"

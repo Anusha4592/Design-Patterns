@@ -1,14 +1,14 @@
+class MyList(list):
+    def __iter__(self):
+        return Iterator(self) 
+
+
 class Iterator(object):
 
     def __init__(self, iterable):
         self.iterable = iterable
-        if isinstance(iterable, dict):
-            self.iterable = iterable.keys()
         self.len = len(iterable)
         self.idx = 0
-
-    def __iter__(self):
-        return self
 
     def next(self):
         if self.idx < self.len:
@@ -17,32 +17,31 @@ class Iterator(object):
         else:
             raise StopIteration()
 
+class MyReverseList(list):
+    def __iter__(self):
+        return ReverseIterator(self)
 
+class ReverseIterator(object):
 
-# Generator is an example of the iteration pattern
+    def __init__(self, iterable):
+        self.iterable = iterable
+        self.len = len(iterable)
+        self.idx = self.len -1  
 
-def generate(n):
-    for i in range(n):
-        yield n
+    def next(self):
+        if self.idx >= 0:
+            cur, self.idx = self.idx, self.idx - 1
+            return self.iterable[cur]
+        else:
+            raise StopIteration()
 
 
 if __name__ == '__main__':
-
-    l = [1,2,3]
-    li = Iterator(l)
-    for i in li:
+    my_list = MyList([1,2,3])
+    for i in my_list:
         print i
 
-    s = "Hello"
-    si = Iterator(s)
-    for i in si:
+    my_rlist = MyReverseList([1,2,3])
+    print "Iterate in reverse order.."
+    for i in my_rlist:
         print i
-
-    d = {3:4, 6:7}
-    di = Iterator(d)
-    for i in di:
-        print i
-    #gen = generate(5)
-    #for i in gen:
-    #    print i
-

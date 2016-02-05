@@ -15,12 +15,15 @@ class Car(object):
     def __init__(self):
         self.size = None
         self.doors = None
-        self.seats = None
+        self.seats = None 
+        self.headlights = None
 
     def __repr__(self):
-        return "%s size Car with %s doors and %s seats" %(self.size, self.doors, self.seats)
+        return "Car Specs: \n Size :%s\n Doors:%s\n Seats:%s" %(self.size, self.doors, self.seats)
 
+#Abstarct Car Builder
 class CarBuilder(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self):
         self.car = None
@@ -37,8 +40,8 @@ class CarBuilder(object):
     def build_seats(self):
         pass
 
-    def build_truck(self):
-        pass
+    def build_headlights(self):
+        self.car.headlights = 2
 
     def new_car(self):
         self.car = Car()
@@ -57,6 +60,9 @@ class SedanCarBuilder(CarBuilder):
         self.car.seats = 5
         print "Building %s seats for the car..." %self.car.seats
 
+    def get_car(self):
+        return self.car
+
 class CoupeBuilder(CarBuilder):
 
     def build_size(self):
@@ -71,15 +77,13 @@ class CoupeBuilder(CarBuilder):
         self.car.seats = 5
         print "Building %s seats for the car..." %self.car.seats
 
+    def get_car(self):
+        return self.car
 
 if __name__ == '__main__':
-    builder = SedanCarBuilder()
-    director = Director(builder)
-    director.build_car()
-    print builder.car
-
+    #builder = SedanCarBuilder()
     builder = CoupeBuilder()
     director = Director(builder)
     director.build_car()
-    print builder.car
-
+    #print builder.car
+    print builder.get_car()
